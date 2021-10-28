@@ -1,4 +1,3 @@
-from asyncio.exceptions import IncompleteReadError
 from quart import Quart
 from quart import jsonify
 app = Quart(__name__)
@@ -8,7 +7,7 @@ from quotes import getQuoteList
 
 @app.route("/")
 async def hello():
-    return "<h1 style='color:blue'>Hello World!</h1>"
+    return "Error 404"
 
 @app.route("/random/quote", methods=["GET"])
 async def randomQuote():
