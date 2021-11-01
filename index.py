@@ -1,13 +1,19 @@
 from quart import Quart
 from quart import jsonify
-app = Quart(__name__)
-
 import random
 from quotes import getQuoteList
 
+quotes = getQuoteList()
+app = Quart(__name__)
+
+
 @app.route("/")
 async def hello():
-    return "Error 404"
+    return jsonify({
+        "randomQuotesEndpoint": "https://api.alexx.lol/random/quote"
+        })
+
+
 
 @app.route("/random/quote", methods=["GET"])
 async def randomQuote():
@@ -18,6 +24,6 @@ async def randomQuote():
         "author": quotes[index]["author"]
         })
 
-if __name__ == "__main__":    
-    quotes = getQuoteList()
-    app.run()
+# if __name__ == "__main__":    
+#     app.run()
+# removed this debug only code not meant for production
