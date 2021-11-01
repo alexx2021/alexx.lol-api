@@ -2,16 +2,19 @@ from quart import Quart
 from quart import jsonify
 import random
 from quotes import getQuoteList
+from jokes import getJokeList
+from words import getWordList
 
 quotes = getQuoteList()
+words = getWordList()
+jokes = getJokeList()
+
 app = Quart(__name__)
 
 
 @app.route("/")
 async def hello():
-    return jsonify({
-        "randomQuotesEndpoint": "https://api.alexx.lol/random/quote"
-        })
+    return "Try /random/quote, /random/word and /random/joke"
 
 
 
@@ -23,6 +26,30 @@ async def randomQuote():
         "text": quotes[index]["text"],
         "author": quotes[index]["author"]
         })
+
+
+@app.route("/random/joke", methods=["GET"])
+async def randomJoke():
+    index = random.randrange(0,376) #377 jokes total
+
+    return jsonify({
+        "type": jokes[index]["type"],
+        "setup": jokes[index]["setup"],
+        "punchline": jokes[index]["punchline"]
+        })
+
+@app.route("/random/word", methods=["GET"])
+async def randomWord():
+
+    index = random.randrange(0,1951) #1952 words total 
+
+    return jsonify({
+        "word": words[index],
+        "length": len(words[index]),
+        "firstLetter": words[index][0]
+        })
+
+
 
 # if __name__ == "__main__":    
 #     app.run()
