@@ -49,6 +49,23 @@ async def randomWord():
         "firstLetter": words[index][0]
         })
 
+@app.route("/random/word/10", methods=["GET"])
+async def randomWordTen():
+    return jsonify({
+        "words": [
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)],
+            words[random.randrange(0,1951)]
+        ]
+
+        })
 
 
 # if __name__ == "__main__":    
